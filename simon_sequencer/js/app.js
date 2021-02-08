@@ -100,5 +100,20 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
         // App.checkSequence();
         // console.log(userSequence)
         console.log(checkSequence())
+
+        main()
     }
 })
+
+async function main() {
+    addRandomSequenceStep()
+    for (step in generatedSequence) {
+        console.log(generatedSequence)
+        console.log(step)
+        console.log(generatedSequence[step])
+        cueUser(generatedSequence[step])
+    }
+    console.log('test')
+}
+
+main()
