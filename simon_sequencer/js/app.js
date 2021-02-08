@@ -74,6 +74,14 @@ function checkSequence() {
     }
 }
 
+function cueUser(step) {
+    console.log(step)
+    button = d.querySelector('#' + step)
+    button.classList.add('active')
+    setTimeout(()=>{
+        button.classList.remove('active')
+    }, 5000)
+}
 
 // testing sequence generation
 // for (i=0; i<5; i++) {
