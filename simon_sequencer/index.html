@@ -9,6 +9,21 @@
     <script src="js/app.js" defer></script>
 </head>
 <body>
-    
+    <div id="app-container">
+        <div id="game-container">
+            <h1 id="player-name">Player Name</h1>
+            <div id="game-controls">
+                <button class="step-selection-button" id="up-button" value="1">1</button>
+                <button class="step-selection-button" id="left-button" value="2">2</button>
+                <button class="step-selection-button" id="right-button" value="3">3</button>
+                <button class="step-selection-button" id="down-button" value="4">4</button>
+            </div>
+            <h3 id="current-score">0</h3>
+        </div>
+        <div id="scores-container">
+            <h2>High Scores:</h2>
+            <ul id="high-scores-list"></ul>
+        </div>
+    </div>
 </body>
 </html>
