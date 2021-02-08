@@ -59,6 +59,16 @@ const App = {
         sequence.push(sequenceOptions[randomChoice])
         console.log(sequence)
     }
+
+    ,checkSequence: () => {
+        userIndex = userSequence.length - 1
+        if (userSequence[userIndex] === sequence[userIndex]) {
+            // console.log(userSequence[userIndex], sequence[userIndex])
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 // for (i=0; i<5; i++) {
@@ -73,7 +83,7 @@ const App = {
 const EventHandlers = {
     onUserStepSelectionMouse: (button) => {
         userSequence.push(parseInt(button.value))
-        console.log(userSequence)
+        // console.log(userSequence)
     }
 }
 
@@ -84,7 +94,8 @@ const EventHandlers = {
 
 d.querySelector('#game-controls').addEventListener('click', (e) => {
     if (e.target.className == 'step-selection-button') {
-        console.log(e.target)
+        // console.log(e.target)
         EventHandlers.onUserStepSelectionMouse(e.target)
+        App.checkSequence()
     }
 })
