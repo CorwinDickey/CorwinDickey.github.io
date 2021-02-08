@@ -13,6 +13,13 @@
     ;background-color: royalblue
 }
 
+.step-selection-button {
+    width: 20px
+    ;height: 20px
+    ;background-color: white
+    ;margin: 2%
+}
+
 #player-name {
     justify-content: center
 }
@@ -27,4 +34,8 @@
 
 #high-scores-list {
     justify-content: flex-start
+}
+
+.active {
+    background-color: yellow
 }
