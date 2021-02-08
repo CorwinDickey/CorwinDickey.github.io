@@ -43,7 +43,12 @@ Success at repeating a sequence allows user to progress to next sequence which i
 // Sets variables for use in app
 generatedSequence = []
 userSequence = []
-sequenceOptions = [1,2,3,4]
+sequenceOptions = [
+    'up-button'
+    ,'left-button'
+    ,'right-button'
+    ,'down-button'
+]
 
 d = document
 
@@ -55,22 +60,27 @@ d = document
 
 const App = {
     // add a new randomly generated step to the sequence
-    increaseSequence: () => {
+    addRandomSequenceStep: () => {
         randomChoice = Math.floor(Math.random() * 4)
         generatedSequence.push(sequenceOptions[randomChoice])
-        // console.log(generatedSequence)
+        console.log(generatedSequence)
     }
 
     // check if the user's selected sequence step matches the generated sequence step
     ,checkSequence: () => {
         // get the most recent user sequence step to compare
         userIndex = userSequence.length - 1
-        if (userSequence[userIndex] === generatedSequence[userIndex]) {
-            // console.log('user selection matches computer generated sequence step')
-            return true
+
+        if (userIndex < generatedSequence.length - 1) {
+            if (userSequence[userIndex] === generatedSequence[userIndex]) {
+                // console.log('user selection matches computer generated sequence step')
+                return true
+            } else {
+                // console.log('user selection does not match computer generated sequence step')
+                return false
+            }
         } else {
-            // console.log('user selection does not match computer generated sequence step')
-            return false
+            main()
         }
     }
 }
@@ -86,7 +96,7 @@ const App = {
 
 const EventHandlers = {
     onUserStepSelectionMouse: (button) => {
-        userSequence.push(parseInt(button.value))
+        userSequence.push(button.id)
         // console.log(userSequence)
     }
 }
@@ -100,6 +110,8 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
     if (e.target.className == 'step-selection-button') {
         // console.log(e.target)
         EventHandlers.onUserStepSelectionMouse(e.target)
-        App.checkSequence()
+        App.checkSequence();
+        console.log(userSequence)
+        console.log(App.checkSequence())
     }
 })
