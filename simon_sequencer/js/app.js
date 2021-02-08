@@ -75,12 +75,19 @@ function checkSequence() {
 }
 
 function cueUser(step) {
-    console.log(step)
+    // console.log(step)
+    // console.log(d.querySelector('#' + step))
     button = d.querySelector('#' + step)
-    button.classList.add('active')
-    setTimeout(()=>{
-        button.classList.remove('active')
-    }, 5000)
+    // console.log(button)
+    return new Promise((resolve, reject) => {
+        button.classList.add('active')
+        setTimeout(()=>{
+            button.classList.remove('active')
+            resolve()
+        }, 1000)
+    })
+    
+    
 }
 
 // testing sequence generation
@@ -107,13 +114,12 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
 
 async function main() {
     addRandomSequenceStep()
-    for (step in generatedSequence) {
+    for (step of generatedSequence) {
         console.log(generatedSequence)
         console.log(step)
-        console.log(generatedSequence[step])
-        cueUser(generatedSequence[step])
+        // console.log(generatedSequence[step])
+        await cueUser(step)
     }
-    console.log('test')
 }
 
 main()
