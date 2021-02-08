@@ -1,4 +1,30 @@
-body {
-    background-color: skyblue
+#app-container {
+    background-color: forestgreen
+    ;display: flex
 }
 
+#game-container {
+    border: 5px solid black
+    ;background-color: firebrick
+}
+
+#scores-container {
+    border: 5px solid black
+    ;background-color: royalblue
+}
+
+#player-name {
+    justify-content: center
+}
+
+#game-controls {
+    justify-content: center
+}
+
+#current-score {
+    justify-content: center
+}
+
+#high-scores-list {
+    justify-content: flex-start
+}
