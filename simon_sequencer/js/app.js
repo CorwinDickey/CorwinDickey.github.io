@@ -8,7 +8,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
     [] modal describing how the game works and requesting a user input their name
 
 [] Generate a sequence for the user to repeat
-    [] choose a random sequence step
+    [x] choose a random sequence step
     [] if player progresses, append new random step to end of sequence
     [] sequence should repeat while a user is still in the same game instance
     [] sequence should reset and choose a new random set when a new game is started
@@ -39,4 +39,25 @@ Success at repeating a sequence allows user to progress to next sequence which i
     [] ask player if done, or ready to restart
     [] tied scores are sorted by time with the most recent score on top
 */
+
+// Sets variables for use in app
+sequence = []
+sequenceOptions = [1,2,3,4]
+
+// =================================
+// Application logic
+// Object that contains the functions specific to how the game works
+// =================================
+
+const App = {
+    increaseSequence: () => {
+        randomChoice = Math.floor(Math.random() * 4)
+        sequence.push(sequenceOptions[randomChoice])
+        console.log(sequence)
+    }
+}
+
+for (i=0; i<5; i++) {
+    App.increaseSequence()
+}
 
