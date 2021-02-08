@@ -41,7 +41,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 */
 
 // Sets variables for use in app
-sequence = []
+generatedSequence = []
 userSequence = []
 sequenceOptions = [1,2,3,4]
 
@@ -54,23 +54,27 @@ d = document
 // =================================
 
 const App = {
+    // add a new randomly generated step to the sequence
     increaseSequence: () => {
         randomChoice = Math.floor(Math.random() * 4)
-        sequence.push(sequenceOptions[randomChoice])
-        console.log(sequence)
+        generatedSequence.push(sequenceOptions[randomChoice])
+        // console.log(generatedSequence)
     }
 
+    // check if the user's selected sequence step matches the generated sequence step
     ,checkSequence: () => {
+        // get the most recent user sequence step to compare
         userIndex = userSequence.length - 1
-        if (userSequence[userIndex] === sequence[userIndex]) {
-            // console.log(userSequence[userIndex], sequence[userIndex])
+        if (userSequence[userIndex] === generatedSequence[userIndex]) {
+            // console.log('user selection matches computer generated sequence step')
             return true
         } else {
+            // console.log('user selection does not match computer generated sequence step')
             return false
         }
     }
 }
-
+// testing sequence generation
 // for (i=0; i<5; i++) {
 //     App.increaseSequence()
 // }
