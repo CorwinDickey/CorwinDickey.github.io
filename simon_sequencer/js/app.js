@@ -18,7 +18,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
     [] allow user to accept current score and end/restart the game
 
 [] Provide cues to the player
-    [] visual highlight cue
+    [x] visual highlight cue
     [] short tone auditory cue
     [] mistake auditory cue
 
@@ -42,7 +42,8 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 // Sets variables for use in app
 generatedSequence = []
-userSequence = []
+generatedSequenceIndex = 0
+currentUserStep = ''
 sequenceOptions = [
     'up-button'
     ,'left-button'
@@ -60,17 +61,24 @@ function addRandomSequenceStep() {
 }
 
     // check if the user's selected sequence step matches the generated sequence step
-function checkSequence() {
-    for (userIndex = 0; userIndex < generatedSequence.length; userIndex++ ) {
-        // console.log(userSequence[userIndex])
-        console.log(userSequence[userIndex])
-        if (userSequence[userIndex] === generatedSequence[userIndex]) {
-            console.log('user selection matches computer generated sequence step')
-            return true
-        } else {
-            console.log('user selection does not match computer generated sequence step')
-            return false
+function checkSequence(userStep) {
+
+    sequenceLength = generatedSequence.length
+
+    if (userStep.id === generatedSequence[generatedSequenceIndex]) {
+        generatedSequenceIndex++
+        // console.log(generatedSequenceIndex)
+        // console.log('user selection matches computer generated sequence step')
+        if (generatedSequenceIndex === generatedSequence.length) {
+            generatedSequenceIndex = 0
+            // console.log(generatedSequenceIndex)
+            addRandomSequenceStep()
+            main()
+            return
         }
+    } else {
+        // call user mistake function here
+        // console.log('user selection does not match computer generated sequence step')
     }
 }
 
@@ -86,8 +94,6 @@ function cueUser(step) {
             resolve()
         }, 1000)
     })
-    
-    
 }
 
 // testing sequence generation
@@ -96,8 +102,7 @@ function cueUser(step) {
 // }
 
 function onUserStepSelectionMouse(button) {
-    userSequence.push(button.id)
-    // console.log(userSequence)
+    currentUserStep = button.id
 }
 
 d.querySelector('#game-controls').addEventListener('click', (e) => {
@@ -105,21 +110,20 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
         // console.log(e.target)
         onUserStepSelectionMouse(e.target)
         // App.checkSequence();
-        // console.log(userSequence)
-        console.log(checkSequence())
+        checkSequence(e.target)
 
-        main()
+        // main()
     }
 })
 
 async function main() {
-    addRandomSequenceStep()
     for (step of generatedSequence) {
-        console.log(generatedSequence)
-        console.log(step)
+        // console.log(generatedSequence)
+        // console.log(step)
         // console.log(generatedSequence[step])
         await cueUser(step)
     }
 }
 
+addRandomSequenceStep()
 main()
