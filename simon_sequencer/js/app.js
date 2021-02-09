@@ -78,8 +78,23 @@ function checkSequence(userStep) {
         }
     } else {
         // call user mistake function here
+        userMistake()
         // console.log('user selection does not match computer generated sequence step')
     }
+}
+
+function userMistake() {
+    buttonList = d.querySelectorAll('.step-selection-button')
+    console.log(button)
+    for (button of buttonList) {
+        button.classList.add('mistake')
+    }
+    setTimeout(()=>{
+        for (button of buttonList) {
+           button.classList.remove('mistake') 
+        }
+    }, 500)
+    
 }
 
 function cueUser(step) {
