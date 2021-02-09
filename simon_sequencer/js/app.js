@@ -108,7 +108,9 @@ function cueUser(step) {
 }
 
 function onUserStepSelectionMouse(button) {
+    console.log(button)
     currentUserStep = button.id
+    checkSequence(button)
 }
 
 d.querySelector('#game-controls').addEventListener('click', (e) => {
@@ -116,6 +118,10 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
         // console.log(e.target)
         onUserStepSelectionMouse(e.target)
         checkSequence(e.target)
+    } else if (e.target.className == 'chevron') {
+        onUserStepSelectionMouse(e.target.parentNode)
+        console.log(e.target.parentNode)
+        // checkSequence(e.target.parent)
     }
 })
 
