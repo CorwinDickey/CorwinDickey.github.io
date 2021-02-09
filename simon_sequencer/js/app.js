@@ -9,7 +9,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 [] Generate a sequence for the user to repeat
     [x] choose a random sequence step
-    [] if player progresses, append new random step to end of sequence
+    [x] if player progresses, append new random step to end of sequence
     [x] sequence should repeat while a user is still in the same game instance
     [x] sequence should reset and choose a new random set when a new game is started
 
@@ -20,9 +20,9 @@ Success at repeating a sequence allows user to progress to next sequence which i
 [] Provide cues to the player
     [x] visual highlight cue
     [] short tone auditory cue
-    [] mistake auditory cue
+    [x] mistake cue
 
-[] As the user progresses, update the number at the bottom of the screen to show the current score
+[x] As the user progresses, update the number at the bottom of the screen to show the current score
 
 [] Allow user to choose a step in the sequence
     [x] compare against the corresponding step in the generated sequence
@@ -70,11 +70,7 @@ function checkSequence(userStep) {
         // console.log(generatedSequenceIndex)
         // console.log('user selection matches computer generated sequence step')
         if (generatedSequenceIndex === generatedSequence.length) {
-            generatedSequenceIndex = 0
-            // console.log(generatedSequenceIndex)
-            addRandomSequenceStep()
             main()
-            return
         }
     } else {
         // call user mistake function here
@@ -85,7 +81,6 @@ function checkSequence(userStep) {
 
 function userMistake() {
     buttonList = d.querySelectorAll('.step-selection-button')
-    console.log(button)
     for (button of buttonList) {
         button.classList.add('mistake')
     }
@@ -106,7 +101,9 @@ function cueUser(step) {
         button.classList.add('active')
         setTimeout(()=>{
             button.classList.remove('active')
-            resolve()
+            setTimeout(()=>{
+                resolve()
+            }, 250)
         }, 1000)
     })
 }
@@ -132,6 +129,9 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
 })
 
 async function main() {
+    d.querySelector('#current-score').textContent = generatedSequenceIndex
+    generatedSequenceIndex = 0
+    addRandomSequenceStep()
     for (step of generatedSequence) {
         // console.log(generatedSequence)
         // console.log(step)
@@ -140,5 +140,4 @@ async function main() {
     }
 }
 
-addRandomSequenceStep()
 main()
