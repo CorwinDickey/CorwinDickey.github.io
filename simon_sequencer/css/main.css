@@ -23,11 +23,13 @@
 }
 
 .step-selection-button {
-    text-align: center
-    ;width: 20px
-    ;height: 20px
+    display: flex
+    ;justify-content: center
+    ;align-items: center
+    ;width: 40px
+    ;height: 40px
     ;background-color: white
-    ;margin: 2%
+    ;border-radius: 20px
 }
 
 .top-row {
@@ -37,7 +39,7 @@
 
 .center-row {
     display: flex
-    ;justify-content: center
+    ;justify-content: space-between
 }
 
 .bottom-row {
@@ -50,14 +52,58 @@
     ;background-color: white
 }
 
+/*
+Chevron Shape from Anthony Ticknor via:
+https://css-tricks.com/the-shapes-of-css/
+*/
+.chevron {
+    position: relative;
+    text-align: center;
+    padding: 2%;
+    margin-bottom: 1%;
+    height: 10%;
+    width: 40%;
+}
+.chevron:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 51%;
+    background: red;
+    transform: skew(0deg, 45deg);
+}
+.chevron:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 50%;
+    background: red;
+    transform: skew(0deg, -45deg);
+}
+/* end chevron shape */
+
+#up-button {
+    transform: rotate(180deg)
+}
+
 #left-button {
     align-self: center
     ;justify-self: flex-start
+    ;transform: rotate(90deg)
+}
+
+#current-score {
+    justify-content: center
 }
 
 #right-button {
     align-self: center
     ;justify-self: flex-end
+    ;transform: rotate(270deg)
 }
 
 #down-button {
@@ -66,10 +112,6 @@
 }
 
 #player-name {
-    justify-content: center
-}
-
-#current-score {
     justify-content: center
 }
 
