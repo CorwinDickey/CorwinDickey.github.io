@@ -67,7 +67,6 @@ function checkSequence(userStep) {
 
     if (userStep.id === generatedSequence[generatedSequenceIndex]) {
         generatedSequenceIndex++
-        // console.log(generatedSequenceIndex)
         // console.log('user selection matches computer generated sequence step')
         if (generatedSequenceIndex === generatedSequence.length) {
             main()
@@ -108,11 +107,6 @@ function cueUser(step) {
     })
 }
 
-// testing sequence generation
-// for (i=0; i<5; i++) {
-//     App.increaseSequence()
-// }
-
 function onUserStepSelectionMouse(button) {
     currentUserStep = button.id
 }
@@ -121,10 +115,7 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
     if (e.target.className == 'step-selection-button') {
         // console.log(e.target)
         onUserStepSelectionMouse(e.target)
-        // App.checkSequence();
         checkSequence(e.target)
-
-        // main()
     }
 })
 
