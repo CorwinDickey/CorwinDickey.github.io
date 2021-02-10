@@ -65,26 +65,20 @@ function addRandomSequenceStep() {
 function checkSequence(userStep) {
 
     sequenceLength = generatedSequence.length
-        console.log(userStep)
-        console.log('I\'m being logged')
-        console.log(generatedSequenceIndex)
-        console.log(typeof generatedSequence[generatedSequenceIndex])
     if (userStep == generatedSequence[generatedSequenceIndex]) {
         generatedSequenceIndex++
-        console.log(generatedSequenceIndex, generatedSequence.length)
         // console.log('user selection matches computer generated sequence step')
         if (generatedSequenceIndex == generatedSequence.length) {
-            console.log('I just got called')
             main()
         }
     } else {
         // call user mistake function here
-        userMistake()
+        cueMistake()
         // console.log('user selection does not match computer generated sequence step')
     }
 }
 
-function userMistake() {
+function cueMistake() {
     buttonList = d.querySelectorAll('.step-selection-button')
     for (button of buttonList) {
         button.classList.add('mistake')
@@ -114,6 +108,12 @@ function cueUser(step) {
 
 function onUserStepSelectionMouse(button) {
     // console.log(button)
+    button.classList.add('active')
+        setTimeout(()=>{
+            button.classList.remove('active')
+            setTimeout(()=>{
+            }, 100)
+        }, 150)
     currentUserStep = button.id
     checkSequence(currentUserStep)
 }
@@ -126,7 +126,6 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
             onUserStepSelectionMouse(e.target.parentNode)
         }
     }
-    
 })
 
 async function main() {

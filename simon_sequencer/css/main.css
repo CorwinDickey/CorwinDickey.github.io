@@ -47,6 +47,13 @@ body {
     ;width: 8vw
     ;height: 8vw
     ;border-radius: 100%
+    ;opacity: 30%
+    ;margin: .1vw
+}
+
+.step-selection-button:hover {
+    border: 1px solid black
+    ;margin: 0
 }
 
 .top-row {
@@ -145,7 +152,7 @@ https://css-tricks.com/the-shapes-of-css/
 }
 
 .active {
-    opacity: 50%
+    opacity: 100%
 }
 
 .mistake {
