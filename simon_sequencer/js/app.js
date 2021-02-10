@@ -42,6 +42,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 // Sets variables for use in app
 generatedSequence = []
+clickable = true
 generatedSequenceIndex = 0
 currentUserStep = ''
 sequenceOptions = [
@@ -94,6 +95,7 @@ function userMistake() {
 function cueUser(step) {
     // console.log(step)
     // console.log(d.querySelector('#' + step))
+    clickable = false
     button = d.querySelector('#' + step)
     // console.log(button)
     return new Promise((resolve, reject) => {
@@ -114,15 +116,18 @@ function onUserStepSelectionMouse(button) {
 }
 
 d.querySelector('#game-controls').addEventListener('click', (e) => {
-    if (e.target.className == 'step-selection-button') {
-        // console.log(e.target)
-        onUserStepSelectionMouse(e.target)
-        checkSequence(e.target)
-    } else if (e.target.className == 'chevron') {
-        onUserStepSelectionMouse(e.target.parentNode)
-        console.log(e.target.parentNode)
-        // checkSequence(e.target.parent)
+    if (clickable === true) {
+        if (e.target.className === 'step-selection-button') {
+            // console.log(e.target)
+            onUserStepSelectionMouse(e.target)
+            checkSequence(e.target)
+        } else if (e.target.className === 'chevron') {
+            onUserStepSelectionMouse(e.target.parentNode)
+            console.log(e.target.parentNode)
+            // checkSequence(e.target.parent)
+        }
     }
+    
 })
 
 async function main() {
@@ -135,6 +140,7 @@ async function main() {
         // console.log(generatedSequence[step])
         await cueUser(step)
     }
+    clickable = true
 }
 
 main()
