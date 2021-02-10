@@ -32,11 +32,11 @@ body {
     ;height: 8vw
     ;border-radius: 100%
     ;opacity: 30%
-    ;border: 1px solid transparent
+    ;border: 2px solid transparent
 }
 
 .step-selection-button:hover {
-    border: 1px solid black
+    border: 2px solid black
 }
 
 .top-row {
