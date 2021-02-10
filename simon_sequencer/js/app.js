@@ -171,4 +171,6 @@ async function main() {
     clickable = true
 }
 
-main()
+function startGame() {
+    main()
+}
