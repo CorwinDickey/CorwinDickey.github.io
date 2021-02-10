@@ -74,21 +74,25 @@ function checkSequence(userStep) {
     } else {
         // call user mistake function here
         cueMistake()
+        endGame()
         // console.log('user selection does not match computer generated sequence step')
     }
+}
+
+function endGame() {
+    // add modal telling user they lost
+    // pull player name
+    // pull player score
+    // add new item to highscores list with the user name and score
+    // sort highscores list
 }
 
 function cueMistake() {
     buttonList = d.querySelectorAll('.step-selection-button')
     for (button of buttonList) {
-        button.classList.add('mistake')
+        button.classList.add('active')
+        button.style.backgroundColor = 'red'
     }
-    setTimeout(()=>{
-        for (button of buttonList) {
-           button.classList.remove('mistake') 
-        }
-    }, 500)
-    
 }
 
 function cueUser(step) {
