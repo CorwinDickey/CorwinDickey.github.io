@@ -65,11 +65,16 @@ function addRandomSequenceStep() {
 function checkSequence(userStep) {
 
     sequenceLength = generatedSequence.length
-
-    if (userStep.id === generatedSequence[generatedSequenceIndex]) {
+        console.log(userStep)
+        console.log('I\'m being logged')
+        console.log(generatedSequenceIndex)
+        console.log(typeof generatedSequence[generatedSequenceIndex])
+    if (userStep == generatedSequence[generatedSequenceIndex]) {
         generatedSequenceIndex++
+        console.log(generatedSequenceIndex, generatedSequence.length)
         // console.log('user selection matches computer generated sequence step')
-        if (generatedSequenceIndex === generatedSequence.length) {
+        if (generatedSequenceIndex == generatedSequence.length) {
+            console.log('I just got called')
             main()
         }
     } else {
@@ -93,8 +98,6 @@ function userMistake() {
 }
 
 function cueUser(step) {
-    // console.log(step)
-    // console.log(d.querySelector('#' + step))
     clickable = false
     button = d.querySelector('#' + step)
     // console.log(button)
@@ -105,26 +108,22 @@ function cueUser(step) {
             setTimeout(()=>{
                 resolve()
             }, 250)
-        }, 1000)
+        }, 750)
     })
 }
 
 function onUserStepSelectionMouse(button) {
-    console.log(button)
+    // console.log(button)
     currentUserStep = button.id
-    checkSequence(button)
+    checkSequence(currentUserStep)
 }
 
 d.querySelector('#game-controls').addEventListener('click', (e) => {
     if (clickable === true) {
         if (e.target.className === 'step-selection-button') {
-            // console.log(e.target)
             onUserStepSelectionMouse(e.target)
-            checkSequence(e.target)
         } else if (e.target.className === 'chevron') {
             onUserStepSelectionMouse(e.target.parentNode)
-            console.log(e.target.parentNode)
-            // checkSequence(e.target.parent)
         }
     }
     
@@ -132,12 +131,10 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
 
 async function main() {
     d.querySelector('#current-score').textContent = generatedSequenceIndex
+    currentUserStep = ''
     generatedSequenceIndex = 0
     addRandomSequenceStep()
     for (step of generatedSequence) {
-        // console.log(generatedSequence)
-        // console.log(step)
-        // console.log(generatedSequence[step])
         await cueUser(step)
     }
     clickable = true
