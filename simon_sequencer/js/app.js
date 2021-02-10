@@ -95,6 +95,15 @@ function cueMistake() {
     }
 }
 
+// can only be used in an async function
+function wait(ms) {
+    return new Promise((resolve, reject) => {
+        setTimeout(()=>{
+            resolve()
+        }, ms)
+    })
+}
+
 function cueUser(step) {
     clickable = false
     button = d.querySelector('#' + step)
@@ -137,6 +146,7 @@ async function main() {
     currentUserStep = ''
     generatedSequenceIndex = 0
     addRandomSequenceStep()
+    await wait(1000)
     for (step of generatedSequence) {
         await cueUser(step)
     }
