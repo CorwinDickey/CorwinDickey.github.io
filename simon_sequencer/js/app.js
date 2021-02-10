@@ -2,20 +2,11 @@
 Simon game emulator where the user is required to remember a sequence of colors/sounds and repeat them.
 Success at repeating a sequence allows user to progress to next sequence which is the same as the prior sequence with one additional step added.
 
-[] Allow user to set the name of the current player
-    [] incorporated into high scores
-    [] get demographic data
-    [] modal describing how the game works and requesting a user input their name
-
-[] Generate a sequence for the user to repeat
+[x] Generate a sequence for the user to repeat
     [x] choose a random sequence step
     [x] if player progresses, append new random step to end of sequence
     [x] sequence should repeat while a user is still in the same game instance
     [x] sequence should reset and choose a new random set when a new game is started
-
-[] Allow user to pause between rounds and proceed when ready
-    [] use a modal
-    [] allow user to accept current score and end/restart the game
 
 [] Provide cues to the player
     [x] visual highlight cue
@@ -34,10 +25,6 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 [] Game end
     [] game over when user misses a step in the sequence
-    [] pop-up with player name, score, and position in high-scores
-    [] show position in demographics
-    [] ask player if done, or ready to restart
-    [] tied scores are sorted by time with the most recent score on top
 */
 
 // Sets variables for use in app
