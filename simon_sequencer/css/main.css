@@ -5,28 +5,12 @@ body {
 }
 
 #app-container {
-    background-color: forestgreen
-    ;display: flex
+    display: flex
+    ;flex-direction: column
     ;justify-content: center
     ;align-items: center
     ;width: 90vw
     ;height: 90vh
-}
-
-#scores-container {
-    border: 5px solid black
-    ;background-color: royalblue
-    ;width: 30vw
-}
-
-#high-scores-list {
-    height: 34vw
-}
-
-#game-container {
-    border: 5px solid black
-    ;background-color: firebrick
-    ;width: 30vw
 }
 
 #game-controls {
@@ -141,14 +125,6 @@ https://css-tricks.com/the-shapes-of-css/
     align-self: flex-end
     ;justify-self: center
     ; background-color: orange
-}
-
-#player-name {
-    justify-content: center
-}
-
-#high-scores-list {
-    justify-content: flex-start
 }
 
 .active {

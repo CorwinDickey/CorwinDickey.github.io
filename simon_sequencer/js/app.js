@@ -81,26 +81,26 @@ function checkSequence(userStep) {
     }
 }
 
-function newHighScore(name, score) {
-    newListItem = d.createElement('li')
-    newListItem.classList.add('high-score-item')
+// function newHighScore(name, score) {
+//     newListItem = d.createElement('li')
+//     newListItem.classList.add('high-score-item')
     
-    newName = d.createElement('p')
-    newName.textContent = name
-    newListItem.appendChild(newName)
+//     newName = d.createElement('p')
+//     newName.textContent = name
+//     newListItem.appendChild(newName)
 
-    newScore = d.createElement('p')
-    newScore.textContent = score
-    newListItem.appendChild(newScore)
+//     newScore = d.createElement('p')
+//     newScore.textContent = score
+//     newListItem.appendChild(newScore)
 
-    d.querySelector('#high-scores-list').appendChild(newListItem)
-}
+//     d.querySelector('#high-scores-list').appendChild(newListItem)
+// }
 
 function endGame() {
     // add modal telling user they lost
     // pull player score
     // add new item to highscores list with the user name and score
-    newHighScore(userName, userScore)
+    // newHighScore(userName, userScore - 1)
     // sort highscores list
 }
 
