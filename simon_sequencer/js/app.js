@@ -44,6 +44,8 @@ Success at repeating a sequence allows user to progress to next sequence which i
 generatedSequence = []
 clickable = true
 generatedSequenceIndex = 0
+userName = ''
+userScore = 0
 currentUserStep = ''
 sequenceOptions = [
     'up-button'
@@ -79,11 +81,26 @@ function checkSequence(userStep) {
     }
 }
 
+function newHighScore(name, score) {
+    newListItem = d.createElement('li')
+    newListItem.classList.add('high-score-item')
+    
+    newName = d.createElement('p')
+    newName.textContent = name
+    newListItem.appendChild(newName)
+
+    newScore = d.createElement('p')
+    newScore.textContent = score
+    newListItem.appendChild(newScore)
+
+    d.querySelector('#high-scores-list').appendChild(newListItem)
+}
+
 function endGame() {
     // add modal telling user they lost
-    // pull player name
     // pull player score
     // add new item to highscores list with the user name and score
+    newHighScore(userName, userScore)
     // sort highscores list
 }
 
@@ -142,7 +159,8 @@ d.querySelector('#game-controls').addEventListener('click', (e) => {
 })
 
 async function main() {
-    d.querySelector('#current-score').textContent = generatedSequenceIndex
+    d.querySelector('#current-score').textContent = userScore
+    userScore++
     currentUserStep = ''
     generatedSequenceIndex = 0
     addRandomSequenceStep()
