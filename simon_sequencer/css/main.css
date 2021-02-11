@@ -129,10 +129,12 @@ https://css-tricks.com/the-shapes-of-css/
 }
 
 #start-button {
-    justify-self: center
+    display: flex
     ;width: 30vw
+    ;height: 10vw
+    ;justify-content: center
+    ;align-items: center
     ;font-family: Arial
-    ;text-align: center
     ;font-size: 8vw
     ;background-color: limegreen
     ;color: white
@@ -145,8 +147,7 @@ https://css-tricks.com/the-shapes-of-css/
 }
 
 #start-button:active {
-    width: 29.9vw
-    ;font-size: 7.9vw
+    font-size: 7.5vw
 }
 
 .active {
