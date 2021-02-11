@@ -28,12 +28,12 @@ Success at repeating a sequence allows user to progress to next sequence which i
 */
 
 // Sets variables for use in app
-generatedSequence = []
-clickable = true
-generatedSequenceIndex = 0
-userName = ''
-userScore = 0
-currentUserStep = ''
+// generatedSequence = []
+// clickable = true
+// generatedSequenceIndex = 0
+// userName = ''
+// userScore = 0
+// currentUserStep = ''
 sequenceOptions = [
     'up-button'
     ,'left-button'
@@ -92,7 +92,17 @@ const App = {
     }
 
     ,startGame: function () {
+        this.resetGame()
         this.main()
+    }
+
+    ,resetGame: function () {
+        generatedSequence = []
+        clickable = true
+        generatedSequenceIndex = 0
+        userName = ''
+        userScore = 0
+        currentUserStep = ''
     }
 }
 
@@ -101,140 +111,35 @@ const DOM = {
         buttonList = d.querySelectorAll('.step-selection-button')
         for (button of buttonList) {
             button.classList.add('active')
-            button.style.backgroundColor = 'red'
+            button.classList.add('mistake')
         }
     }
 
-    ,cueUser: function () {
+    ,cueUser: async function () {
         clickable = false
         button = d.querySelector('#' + step)
         // console.log(button)
+        await this.blinkButton(button, 750, 250)
+    }
+
+    ,blinkButton: function (target, show, hide) {
         return new Promise((resolve, reject) => {
-            button.classList.add('active')
+            target.classList.add('active')
             setTimeout(()=>{
-                button.classList.remove('active')
+                target.classList.remove('active')
                 setTimeout(()=>{
                     resolve()
-                }, 250)
-            }, 750)
+                }, hide)
+            }, show)
         })
     }
 }
 
 const EventHandlers = {
-    onUserStepSelection: function (button) {
+    onUserStepSelection: async function (button) {
         // console.log(button)
-        button.classList.add('active')
-        setTimeout(()=>{
-            button.classList.remove('active')
-            setTimeout(()=>{
-            }, 100)
-        }, 150)
+        await DOM.blinkButton(button, 150, 100)
         currentUserStep = button.id
         App.checkSequence(currentUserStep)
     }
 }
-
-const EventListeners = {
-
-}
-
-// // add a new randomly generated step to the sequence
-// function addRandomSequenceStep() {
-//     randomChoice = Math.floor(Math.random() * 4)
-//     generatedSequence.push(sequenceOptions[randomChoice])
-//     console.log(generatedSequence)
-// }
-
-    // check if the user's selected sequence step matches the generated sequence step
-// function checkSequence(userStep) {
-
-//     sequenceLength = generatedSequence.length
-//     if (userStep == generatedSequence[generatedSequenceIndex]) {
-//         generatedSequenceIndex++
-//         // console.log('user selection matches computer generated sequence step')
-//         if (generatedSequenceIndex == generatedSequence.length) {
-//             main()
-//         }
-//     } else {
-//         // call user mistake function here
-//         cueMistake()
-//         endGame()
-//         // console.log('user selection does not match computer generated sequence step')
-//     }
-// }
-
-// function endGame() {
-//     return
-// }
-
-// function cueMistake() {
-//     buttonList = d.querySelectorAll('.step-selection-button')
-//     for (button of buttonList) {
-//         button.classList.add('active')
-//         button.style.backgroundColor = 'red'
-//     }
-// }
-
-// // can only be used in an async function
-// function wait(ms) {
-//     return new Promise((resolve, reject) => {
-//         setTimeout(()=>{
-//             resolve()
-//         }, ms)
-//     })
-// }
-
-// function cueUser(step) {
-//     clickable = false
-//     button = d.querySelector('#' + step)
-//     // console.log(button)
-//     return new Promise((resolve, reject) => {
-//         button.classList.add('active')
-//         setTimeout(()=>{
-//             button.classList.remove('active')
-//             setTimeout(()=>{
-//                 resolve()
-//             }, 250)
-//         }, 750)
-//     })
-// }
-
-// function onUserStepSelectionMouse(button) {
-//     // console.log(button)
-//     button.classList.add('active')
-//         setTimeout(()=>{
-//             button.classList.remove('active')
-//             setTimeout(()=>{
-//             }, 100)
-//         }, 150)
-//     currentUserStep = button.id
-//     checkSequence(currentUserStep)
-// }
-
-// d.querySelector('#game-controls').addEventListener('click', (e) => {
-//     if (clickable === true) {
-//         if (e.target.className === 'step-selection-button') {
-//             EventHandlers.onUserStepSelectionMouse(e.target)
-//         } else if (e.target.className === 'chevron') {
-//             EventHandlers.onUserStepSelectionMouse(e.target.parentNode)
-//         }
-//     }
-// })
-
-// async function main() {
-//     d.querySelector('#current-score').textContent = userScore
-//     userScore++
-//     currentUserStep = ''
-//     generatedSequenceIndex = 0
-//     addRandomSequenceStep()
-//     await wait(1000)
-//     for (step of generatedSequence) {
-//         await cueUser(step)
-//     }
-//     clickable = true
-// }
-
-// function startGame() {
-//     main()
-// }
