@@ -27,21 +27,15 @@ Success at repeating a sequence allows user to progress to next sequence which i
     [] game over when user misses a step in the sequence
 */
 
-// Sets variables for use in app
-// generatedSequence = []
-// clickable = true
-// generatedSequenceIndex = 0
-// userName = ''
-// userScore = 0
-// currentUserStep = ''
+// Sets global variables for use in app
+d = document
 sequenceOptions = [
     'up-button'
     ,'left-button'
     ,'right-button'
     ,'down-button'
 ]
-
-d = document
+clickable = false
 
 const App = {
     addRandomSequenceStep: function () {
@@ -56,12 +50,12 @@ const App = {
             generatedSequenceIndex++
             // console.log('user selection matches computer generated sequence step')
             if (generatedSequenceIndex == generatedSequence.length) {
-                this.main()
+                App.main()
             }
         } else {
             // call user mistake function here
             gameOver = true
-            this.endGame()
+            App.endGame()
             // console.log('user selection does not match computer generated sequence step')
         }
     }
@@ -84,7 +78,7 @@ const App = {
         userScore++
         currentUserStep = ''
         generatedSequenceIndex = 0
-        this.addRandomSequenceStep()
+        App.addRandomSequenceStep()
         await this.wait(1000)
         for (step of generatedSequence) {
             await UI.cueUser(step)
@@ -93,8 +87,8 @@ const App = {
     }
 
     ,startGame: function () {
-        this.resetGame()
-        this.main()
+        App.resetGame()
+        App.main()
     }
 
     ,resetGame: function () {
@@ -126,7 +120,7 @@ const UI = {
         clickable = false
         button = d.querySelector('#' + step)
         // console.log(button)
-        await this.blinkButton(button, 750, 250)
+        await UI.blinkButton(button, 750, 250)
     }
 
     ,blinkButton: function (target, show, hide) {
@@ -144,11 +138,33 @@ const UI = {
 
 const EventHandlers = {
     onUserStepSelection: async function (button) {
-        // console.log(button)
-        currentUserStep = button.id
-        App.checkSequence(currentUserStep)
-        if (!gameOver) {
-            await UI.blinkButton(button, 150, 100)
+        console.log(button)
+        if (clickable) {
+            currentUserStep = button.id
+            App.checkSequence(currentUserStep)
+            if (!gameOver) {
+                await UI.blinkButton(button, 150, 100)
+            }
         }
+        
+    }
+
+    ,onKeyDown: function (e) {
+        keyDown = keyCodes['k' + e.keyCode]
+        button = d.querySelector('#' + keyDown)
+        // console.log(button)
+        EventHandlers.onUserStepSelection(button)
     }
 }
+
+const keyCodes = {
+    k37: 'left-button'
+    ,k38: 'up-button'
+    ,k39: 'right-button'
+    ,k40: 'down-button'
+}
+
+/////////////////////////////////////
+// Event Listeners
+/////////////////////////////////////
+d.addEventListener('keydown', EventHandlers.onKeyDown)
