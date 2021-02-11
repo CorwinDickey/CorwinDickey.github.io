@@ -123,11 +123,11 @@ const UI = {
         await UI.blinkButton(button, 750, 250)
     }
 
-    ,blinkButton: function (target, show, hide) {
+    ,blinkButton: function (button, show, hide) {
         return new Promise((resolve, reject) => {
-            target.classList.add('active')
+            button.classList.add('active')
             setTimeout(()=>{
-                target.classList.remove('active')
+                button.classList.remove('active')
                 setTimeout(()=>{
                     resolve()
                 }, hide)
