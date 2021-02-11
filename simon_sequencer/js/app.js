@@ -20,11 +20,11 @@ Success at repeating a sequence allows user to progress to next sequence which i
     [x] mouse input
     [] wasd input
     [] ijkl input
-    [] directional keys input
+    [x] directional keys input
     [] numpad keys input
 
-[] Game end
-    [] game over when user misses a step in the sequence
+[x] Game end
+    [x] game over when user misses a step in the sequence
 */
 
 // Sets global variables for use in app
@@ -150,6 +150,7 @@ const EventHandlers = {
     }
 
     ,onKeyDown: function (e) {
+        console.log(e.keyCode)
         keyDown = keyCodes['k' + e.keyCode]
         button = d.querySelector('#' + keyDown)
         // console.log(button)
@@ -162,6 +163,11 @@ const keyCodes = {
     ,k38: 'up-button'
     ,k39: 'right-button'
     ,k40: 'down-button'
+    ,k65: 'left-button'
+    ,k87: 'up-button'
+    ,k68: 'right-button'
+    ,k83: 'down-button'
+
 }
 
 /////////////////////////////////////
