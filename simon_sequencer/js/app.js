@@ -111,10 +111,12 @@ const app = {
         }
     }
 
-    ,winGame: function () {
-        confetti()
-        winModal = d.createElement('div')
-        winModal.classList.add('win-modal')
+    ,winGame: async function () {
+        await userInterface.fadeModal()
+        confetti({
+                particleCount: 1500
+                ,spread: 180
+        })
     }
 }
 
@@ -143,6 +145,19 @@ const userInterface = {
                     resolve()
                 }, hide)
             }, show)
+        })
+    }
+
+    ,fadeModal: function() {
+        return new Promise ((resolve, reject) => {
+            winModal = d.querySelector('#win-modal')
+            opacity = winModal.style.opacity
+            console.log(winModal.style.opacity)
+            winModal.style.zIndex = 1
+            setInterval(()=>{
+                winModal.style.opacity += .1
+                resolve()
+            }, 200)
         })
     }
 }
