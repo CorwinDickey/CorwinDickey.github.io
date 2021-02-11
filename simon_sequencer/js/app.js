@@ -53,8 +53,6 @@ const app = {
             if (generatedSequenceIndex == generatedSequence.length) {
                 app.main()
             }
-        } else if (userScore === 20) {
-            app.winGame()
         } else {
             // call user mistake function here
             gameOver = true
@@ -78,15 +76,19 @@ const app = {
 
     ,main: async function () {
         d.querySelector('#current-score').textContent = userScore
-        userScore++
-        currentUserStep = ''
-        generatedSequenceIndex = 0
-        app.addRandomSequenceStep()
-        await this.wait(1000)
-        for (step of generatedSequence) {
-            await userInterface.cueUser(step)
+        if (userScore === 2) {
+            app.winGame()
+        } else {
+            userScore++
+            currentUserStep = ''
+            generatedSequenceIndex = 0
+            app.addRandomSequenceStep()
+            await this.wait(1000)
+            for (step of generatedSequence) {
+                await userInterface.cueUser(step)
+            }
+            clickable = true
         }
-        clickable = true
     }
 
     ,startGame: function () {
@@ -107,6 +109,12 @@ const app = {
             button.classList.remove('active')
             button.classList.remove('mistake')
         }
+    }
+
+    ,winGame: function () {
+        confetti()
+        winModal = d.createElement('div')
+        winModal.classList.add('win-modal')
     }
 }
 
@@ -141,7 +149,7 @@ const userInterface = {
 
 const eventHandlers = {
     onUserStepSelection: async function (button) {
-        console.log(button)
+        console.log(button.id)
         if (clickable) {
             currentUserStep = button.id
             app.checkSequence(currentUserStep)
@@ -153,7 +161,7 @@ const eventHandlers = {
     }
 
     ,onKeyDown: function (e) {
-        console.log(e.keyCode)
+        // console.log(e.keyCode)
         keyDown = keyCodes['k' + e.keyCode]
         button = d.querySelector('#' + keyDown)
         // console.log(button)
