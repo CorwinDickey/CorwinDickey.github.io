@@ -148,17 +148,18 @@ const userInterface = {
         })
     }
 
-    ,fadeModal: function() {
-        return new Promise ((resolve, reject) => {
-            winModal = d.querySelector('#win-modal')
-            opacity = winModal.style.opacity
-            console.log(winModal.style.opacity)
-            winModal.style.zIndex = 1
-            setInterval(()=>{
-                winModal.style.opacity += .1
-                resolve()
-            }, 200)
-        })
+    ,fadeModal: async function() {
+        winModal = d.querySelector('#win-modal')
+        opacity = Number(window.getComputedStyle(winModal).getPropertyValue('opacity'))
+        console.log(opacity)
+        winModal.style.zIndex = 1
+
+        while (opacity < 1) {
+            opacity += .1
+            winModal.style.opacity = opacity
+            console.log(opacity)
+            await app.wait(10)
+        }
     }
 }
 
