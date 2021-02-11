@@ -60,13 +60,14 @@ const App = {
             }
         } else {
             // call user mistake function here
+            gameOver = true
             this.endGame()
             // console.log('user selection does not match computer generated sequence step')
         }
     }
 
     ,endGame: function () {
-        DOM.cueMistake()
+        UI.cueMistake()
         return
     }
 
@@ -86,7 +87,7 @@ const App = {
         this.addRandomSequenceStep()
         await this.wait(1000)
         for (step of generatedSequence) {
-            await DOM.cueUser(step)
+            await UI.cueUser(step)
         }
         clickable = true
     }
@@ -98,15 +99,21 @@ const App = {
 
     ,resetGame: function () {
         generatedSequence = []
+        gameOver = false
         clickable = true
         generatedSequenceIndex = 0
         userName = ''
         userScore = 0
         currentUserStep = ''
+        buttonList = d.querySelectorAll('.step-selection-button')
+        for (button of buttonList) {
+            button.classList.remove('active')
+            button.classList.remove('mistake')
+        }
     }
 }
 
-const DOM = {
+const UI = {
     cueMistake: function () {
         buttonList = d.querySelectorAll('.step-selection-button')
         for (button of buttonList) {
@@ -138,8 +145,10 @@ const DOM = {
 const EventHandlers = {
     onUserStepSelection: async function (button) {
         // console.log(button)
-        await DOM.blinkButton(button, 150, 100)
         currentUserStep = button.id
         App.checkSequence(currentUserStep)
+        if (!gameOver) {
+            await UI.blinkButton(button, 150, 100)
+        }
     }
 }
