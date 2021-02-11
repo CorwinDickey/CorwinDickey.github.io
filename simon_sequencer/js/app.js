@@ -18,13 +18,14 @@ Success at repeating a sequence allows user to progress to next sequence which i
 [] Allow user to choose a step in the sequence
     [x] compare against the corresponding step in the generated sequence
     [x] mouse input
-    [] wasd input
+    [x] wasd input
     [] ijkl input
     [x] directional keys input
     [] numpad keys input
 
 [x] Game end
     [x] game over when user misses a step in the sequence
+    [] player wins when the score hits 20
 */
 
 // Sets global variables for use in app
@@ -37,7 +38,7 @@ sequenceOptions = [
 ]
 clickable = false
 
-const App = {
+const app = {
     addRandomSequenceStep: function () {
         randomChoice = Math.floor(Math.random() * 4)
         generatedSequence.push(sequenceOptions[randomChoice])
@@ -50,18 +51,20 @@ const App = {
             generatedSequenceIndex++
             // console.log('user selection matches computer generated sequence step')
             if (generatedSequenceIndex == generatedSequence.length) {
-                App.main()
+                app.main()
             }
+        } else if (userScore === 20) {
+            app.winGame()
         } else {
             // call user mistake function here
             gameOver = true
-            App.endGame()
+            app.endGame()
             // console.log('user selection does not match computer generated sequence step')
         }
     }
 
     ,endGame: function () {
-        UI.cueMistake()
+        userInterface.cueMistake()
         return
     }
 
@@ -78,17 +81,17 @@ const App = {
         userScore++
         currentUserStep = ''
         generatedSequenceIndex = 0
-        App.addRandomSequenceStep()
+        app.addRandomSequenceStep()
         await this.wait(1000)
         for (step of generatedSequence) {
-            await UI.cueUser(step)
+            await userInterface.cueUser(step)
         }
         clickable = true
     }
 
     ,startGame: function () {
-        App.resetGame()
-        App.main()
+        app.resetGame()
+        app.main()
     }
 
     ,resetGame: function () {
@@ -107,7 +110,7 @@ const App = {
     }
 }
 
-const UI = {
+const userInterface = {
     cueMistake: function () {
         buttonList = d.querySelectorAll('.step-selection-button')
         for (button of buttonList) {
@@ -120,7 +123,7 @@ const UI = {
         clickable = false
         button = d.querySelector('#' + step)
         // console.log(button)
-        await UI.blinkButton(button, 750, 250)
+        await userInterface.blinkButton(button, 750, 250)
     }
 
     ,blinkButton: function (button, show, hide) {
@@ -136,14 +139,14 @@ const UI = {
     }
 }
 
-const EventHandlers = {
+const eventHandlers = {
     onUserStepSelection: async function (button) {
         console.log(button)
         if (clickable) {
             currentUserStep = button.id
-            App.checkSequence(currentUserStep)
+            app.checkSequence(currentUserStep)
             if (!gameOver) {
-                await UI.blinkButton(button, 150, 100)
+                await userInterface.blinkButton(button, 150, 100)
             }
         }
         
@@ -154,7 +157,7 @@ const EventHandlers = {
         keyDown = keyCodes['k' + e.keyCode]
         button = d.querySelector('#' + keyDown)
         // console.log(button)
-        EventHandlers.onUserStepSelection(button)
+        eventHandlers.onUserStepSelection(button)
     }
 }
 
@@ -173,4 +176,4 @@ const keyCodes = {
 /////////////////////////////////////
 // Event Listeners
 /////////////////////////////////////
-d.addEventListener('keydown', EventHandlers.onKeyDown)
+d.addEventListener('keydown', eventHandlers.onKeyDown)
