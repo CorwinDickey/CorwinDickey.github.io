@@ -1,5 +1,5 @@
 # Simon Sequencer
-General Assembly Software Engineering Immersive, 1-19-2021 - Project 1
+General Assembly Software Engineering Immersive, 1-19-2021 - Project 1  
 [Live Page](https://corwindickey.github.io/simon_sequencer/)  
 [Repository](https://github.com/CorwinDickey/CorwinDickey.github.io/tree/main/simon_sequencer)  
 
