@@ -143,7 +143,7 @@ const app = {
 
     // called if the player selects the play-again-button on the game over modal
     ,playAgain: function () {
-        userScore = 0 // resets the user score value so the previous round score isn't showing when the user clicks the play-again-button
+        app.resetGame() // resets the game state so the everything looks the same as when the page is first loaded
         d.querySelector('#current-score').textContent = userScore
         userInterface.hideModal() // hides the game over modal
     }
