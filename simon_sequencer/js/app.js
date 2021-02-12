@@ -79,6 +79,7 @@ const app = {
 
     ,main: async function () {
         playingRound = true
+        await app.wait(50)
         userInterface.toggleWait()
         d.querySelector('#current-score').textContent = userScore
         if (userScore === difficulty) {
@@ -88,7 +89,7 @@ const app = {
             currentUserStep = ''
             generatedSequenceIndex = 0
             app.addRandomSequenceStep()
-            await this.wait(1000)
+            await app.wait(1000)
             for (step of generatedSequence) {
                 await userInterface.cueUser(step)
             }
