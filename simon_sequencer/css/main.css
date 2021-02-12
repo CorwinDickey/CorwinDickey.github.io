@@ -59,7 +59,7 @@ body {
     ;border: 2px solid transparent
 }
 
-.step-selection-button:hover {
+.step-selection-button.playable:hover {
     border: 2px solid black
 }
 
@@ -180,4 +180,23 @@ https://css-tricks.com/the-shapes-of-css/
 
 .mistake {
     background-color: red !important
+}
+
+.wait {
+    background-color: yellow !important
+    ;color: black !important
+}
+
+#start-button.wait:active {
+    font-size: 8vw
+}
+
+#start-button.wait:hover {
+    border: 2px solid transparent
+}
+
+.no-select {
+    -webkit-user-select: none
+    ;-moz-user-select: none
+    ;user-select: none
 }

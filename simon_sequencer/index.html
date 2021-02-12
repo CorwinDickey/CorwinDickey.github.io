@@ -13,11 +13,11 @@
     <div id="app-container">
         <div id="win-modal">
             <div id="win-modal-textbox">
-                <h1>YOU WON!</h1>
-                <a href="index.html">Do you want to play again?</a>
+                <h1 class="no-select">YOU WON!</h1>
+                <div id="play-again-button" onclick="app.playAgain()" class="no-select">PLAY AGAIN</div>
             </div>
         </div>
-        <div id="start-button" onclick="app.startGame()">START</div>
+        <div id="start-button" onclick="app.startGame()" class="no-select">START</div>
         <div id="game-controls">
             <div class="top-row">
                 <div class="step-selection-button" id="up-button" onclick="eventHandlers.onUserStepSelection(this)">
@@ -28,7 +28,7 @@
                 <div class="step-selection-button" id="left-button" onclick="eventHandlers.onUserStepSelection(this)">
                     <div class="chevron"></div>
                 </div>
-                <h3 id="current-score">0</h3>
+                <h3 id="current-score" class="no-select">0</h3>
                 <div class="step-selection-button" id="right-button" onclick="eventHandlers.onUserStepSelection(this)">
                     <div class="chevron"></div>
                 </div>

@@ -30,6 +30,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 // Sets global variables for use in app
 d = document
+difficulty = 3
 sequenceOptions = [
     'up-button'
     ,'left-button'
@@ -37,6 +38,7 @@ sequenceOptions = [
     ,'down-button'
 ]
 clickable = false
+playingRound = false
 
 const app = {
     addRandomSequenceStep: function () {
@@ -75,8 +77,10 @@ const app = {
     }
 
     ,main: async function () {
+        playingRound = true
+        userInterface.toggleWait()
         d.querySelector('#current-score').textContent = userScore
-        if (userScore === 2) {
+        if (userScore === difficulty) {
             app.winGame()
         } else {
             userScore++
@@ -89,17 +93,22 @@ const app = {
             }
             clickable = true
         }
+        playingRound = false
+        userInterface.toggleWait()
     }
 
     ,startGame: function () {
-        app.resetGame()
-        app.main()
+        if (!playingRound) {
+            app.resetGame()
+            app.main()
+        }
     }
 
     ,resetGame: function () {
         generatedSequence = []
         gameOver = false
-        clickable = true
+        playingRound = false
+        clickable = false
         generatedSequenceIndex = 0
         userName = ''
         userScore = 0
@@ -108,24 +117,33 @@ const app = {
         for (button of buttonList) {
             button.classList.remove('active')
             button.classList.remove('mistake')
+            button.classList.remove('playable')
         }
     }
 
     ,winGame: async function () {
-        await userInterface.fadeModal()
         confetti({
                 particleCount: 1500
-                ,spread: 180
+                ,spread: 90
         })
+        await userInterface.showModal()
+    }
+
+    ,playAgain: function () {
+        app.resetGame()
+        userInterface.hideModal()
+        d.querySelector('#current-score').textContent = userScore
     }
 }
 
 const userInterface = {
     cueMistake: function () {
+        clickable = false
         buttonList = d.querySelectorAll('.step-selection-button')
         for (button of buttonList) {
             button.classList.add('active')
             button.classList.add('mistake')
+            button.classList.remove('playable')
         }
     }
 
@@ -148,7 +166,7 @@ const userInterface = {
         })
     }
 
-    ,fadeModal: async function() {
+    ,showModal: async function () {
         winModal = d.querySelector('#win-modal')
         opacity = Number(window.getComputedStyle(winModal).getPropertyValue('opacity'))
         console.log(opacity)
@@ -158,7 +176,45 @@ const userInterface = {
             opacity += .1
             winModal.style.opacity = opacity
             console.log(opacity)
-            await app.wait(10)
+            await app.wait(15)
+        }
+    }
+
+    ,hideModal: async function () {
+        winModal = d.querySelector('#win-modal')
+        opacity = Number(window.getComputedStyle(winModal).getPropertyValue('opacity'))
+        console.log(opacity)
+        winModal.style.zIndex = -1
+
+        while (opacity > 0) {
+            opacity -= .1
+            winModal.style.opacity = opacity
+            console.log(opacity)
+            await app.wait(15)
+        }
+    }
+    
+    ,toggleWait: function () {
+        startButton = d.querySelector('#start-button')
+        startButton.classList.toggle('wait')
+        console.log(startButton.innerHTML)
+
+        gameButtons = d.querySelectorAll('.step-selection-button')
+
+        if (startButton.innerHTML == 'START') {
+            startButton.classList.add('wait')
+            console.log('The button should say wait')
+            startButton.innerHTML = 'WAIT'
+            for (button of gameButtons) {
+                button.classList.remove('playable')
+            }
+        } else {
+            startButton.classList.remove('wait')
+            console.log('The button should say start')
+            startButton.innerHTML = 'START'
+            for (button of gameButtons) {
+                button.classList.add('playable')
+            }
         }
     }
 }
