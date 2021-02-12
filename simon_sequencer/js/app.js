@@ -30,7 +30,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 // Sets global variables for use in app
 d = document
-difficulty = 1
+difficulty = 5
 sequenceOptions = [
     'up-button'
     ,'left-button'
