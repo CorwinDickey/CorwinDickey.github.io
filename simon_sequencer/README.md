@@ -1,7 +1,7 @@
 # Simon Sequencer
 General Assembly Software Engineering Immersive, 1-19-2021 - Project 1
-* Project: https://corwindickey.github.io/simon_sequencer/
-* GitHub: https://github.com/CorwinDickey/CorwinDickey.github.io/tree/main/simon_sequencer
+* [Live Page](https://corwindickey.github.io/simon_sequencer/)
+* [Repository](https://github.com/CorwinDickey/CorwinDickey.github.io/tree/main/simon_sequencer)
 
 ## Overview
 We were given a choice of 5 different games to recreate in a web browser format, in order to showcase the skills we learned in module 1. I chose to emulate the Simon game.
