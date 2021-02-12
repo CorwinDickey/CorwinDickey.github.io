@@ -30,7 +30,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 // Sets global variables for use in app
 d = document
-difficulty = 3
+difficulty = 1
 sequenceOptions = [
     'up-button'
     ,'left-button'
@@ -58,13 +58,14 @@ const app = {
         } else {
             // call user mistake function here
             gameOver = true
-            app.endGame()
+            app.loseGame()
             // console.log('user selection does not match computer generated sequence step')
         }
     }
 
-    ,endGame: function () {
+    ,loseGame: function () {
         userInterface.cueMistake()
+        userInterface.showModal('try again!')
         return
     }
 
@@ -126,7 +127,7 @@ const app = {
                 particleCount: 1500
                 ,spread: 90
         })
-        await userInterface.showModal()
+        await userInterface.showModal('you win!')
     }
 
     ,playAgain: function () {
@@ -166,32 +167,31 @@ const userInterface = {
         })
     }
 
-    ,showModal: async function () {
-        winModal = d.querySelector('#win-modal')
-        opacity = Number(window.getComputedStyle(winModal).getPropertyValue('opacity'))
-        console.log(opacity)
-        winModal.style.zIndex = 1
-
+    ,showModal: async function (gameOverMessage) {
+        modal = d.querySelector('#modal')
+        d.querySelector('#game-over-message').textContent = gameOverMessage.toUpperCase()
+        opacity = Number(window.getComputedStyle(modal).getPropertyValue('opacity'))
+        // console.log(opacity)
+        modal.style.zIndex = 1
         while (opacity < 1) {
             opacity += .1
-            winModal.style.opacity = opacity
+            modal.style.opacity = opacity
             console.log(opacity)
             await app.wait(15)
         }
     }
 
     ,hideModal: async function () {
-        winModal = d.querySelector('#win-modal')
-        opacity = Number(window.getComputedStyle(winModal).getPropertyValue('opacity'))
-        console.log(opacity)
-        winModal.style.zIndex = -1
-
+        modal = d.querySelector('#modal')
+        opacity = Number(window.getComputedStyle(modal).getPropertyValue('opacity'))
+        // console.log(opacity)
         while (opacity > 0) {
             opacity -= .1
-            winModal.style.opacity = opacity
+            modal.style.opacity = opacity
             console.log(opacity)
             await app.wait(15)
         }
+        modal.style.zIndex = -1
     }
     
     ,toggleWait: function () {
