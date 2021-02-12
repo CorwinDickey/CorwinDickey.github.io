@@ -34,6 +34,45 @@ difficulty = 5 // sets the required user score to 'win'
 clickable = false // keeps the user from clicking on any game control buttons before the game begins and during round presentation
 playingRound = false // allows the user to click the start button while a round is not in progress
 
+// Sounds taken from http://codeperspectives.com/front-end/simon-says-sound/
+
+sounds = {
+    a_sharp: function() {
+        playSound = new Audio('sounds/a_sharp.wav')
+        playSound.play()}
+    
+    ,aww: function() {
+        playSound = new Audio('sounds/aww.wav')
+        playSound.play()}
+    
+    ,applause: function() {
+        playSound = new Audio('sounds/applause.wav')
+        playSound.play()}
+    
+    ,c_sharp: function() {
+        playSound = new Audio('sounds/c_sharp.wav')
+        playSound.play()}
+    
+    ,d_sharp: function() {
+        playSound = new Audio('sounds/d_sharp.wav')
+        playSound.play()}
+    
+    ,f_sharp: function() {
+        playSound = new Audio('sounds/f_sharp.wav')
+        playSound.play()}
+    
+    ,g_sharp: function() {
+        playSound = new Audio('sounds/g_sharp.wav')
+        playSound.play()}
+}
+
+buttonSounds = {
+    'up-button': sounds.c_sharp()
+    ,'down-button': sounds.d_sharp()
+    ,'left-button': sounds.f_sharp()
+    ,'right-button': sounds.g_sharp()
+}
+
 // app object holds all the game logic that doesn't deal with updating the user
 // interface or listening for/handling user interactions
 const app = {
@@ -70,6 +109,7 @@ const app = {
 
     // loseGame is called if the user inputs the wrong sequence step
     ,loseGame: function () {
+        sounds.aww()
         userInterface.cueMistake() // cues the user that they made a mistake, redundant after introduction of modal
         userInterface.showModal('try again!') // shows a modal with the message 'TRY AGAIN!' and a button to reset the game
         return
@@ -117,6 +157,7 @@ const app = {
 
     // resets all the variables and style classes on the game controls to start a new game
     ,resetGame: function () {
+        sounds.a_sharp()
         generatedSequence = []
         gameOver = false
         playingRound = false
@@ -134,6 +175,7 @@ const app = {
 
     // when the user wins, show a modal with the "YOU WIN!" message and pop confetti in celebration
     ,winGame: async function () {
+        sounds.applause()
         confetti({
                 particleCount: 1500 // controls how many pieces of confetti are created
                 ,spread: 90 // controls the angle of spread of the confetti firing
@@ -167,6 +209,7 @@ const userInterface = {
     // highlights the button to cue the user to the next step in the sequence
     ,cueUser: async function (step) {
         clickable = false // prevents the user from clicking buttons while being shown the current round
+        // buttonSounds[step]
         button = d.querySelector('#' + step) // selects the button for the appropriate step in the sequence
         // console.log(button)
         await userInterface.blinkButton(button, 750, 250) // blinks the button to show the user which button should be clicked
@@ -175,6 +218,7 @@ const userInterface = {
     // causes the button to be highlighted, then un-highlighted to provide feedback to the user
     // arguments include which button should be highlighted, how long the button should be highlighted, and how long the game should wait before the next button is highlighted
     ,blinkButton: function (button, show, hide) {
+        buttonSounds[button.id]
         return new Promise((resolve, reject) => {
             button.classList.add('active') // highlights the button
             setTimeout(()=>{
