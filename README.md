@@ -5,7 +5,8 @@ Here you can find a little about me and all of the projects that I have worked o
 ## Projects
 
 ### You Vaporized My Voidship
-Published:  In Development
+[Repository](https://github.com/CorwinDickey/CorwinDickey.github.io/tree/main/you_vaporized_my_voidship)
+Published: In Development  
 Created: Feb 14, 2021  
 Last Edited: Feb 14, 2021  
 
