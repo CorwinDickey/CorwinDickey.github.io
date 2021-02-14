@@ -1,12 +1,12 @@
 # Welcome to my GitHub page!
 
-Here you can find a little about me and all of the projects that I have worked on or are currently in development. Projects are listed chronologically based on when they were created.
+Here you can find a little about me and all of the projects that I have worked on or are currently in development. Projects are listed chronologically based on when they were published.
 
 ## Projects
 
-### Simon Sequencer
-[Live Page](https://corwindickey.github.io/simon_sequencer/)  
+### [Simon Sequencer](https://corwindickey.github.io/simon_sequencer/) 
 [Repository](https://github.com/CorwinDickey/CorwinDickey.github.io/tree/main/simon_sequencer)  
+Published: Feb 12, 2021  
 Created: Feb 5, 2021  
 Last Edited: Feb 12, 2021  
 
