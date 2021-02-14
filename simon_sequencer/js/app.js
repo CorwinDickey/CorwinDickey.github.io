@@ -30,7 +30,7 @@ Success at repeating a sequence allows user to progress to next sequence which i
 
 // Sets global variables for use in app
 d = document
-difficulty = 5 // sets the required user score to 'win'
+difficulty = 20 // sets the required user score to 'win'
 clickable = false // keeps the user from clicking on any game control buttons before the game begins and during round presentation
 playingRound = false // allows the user to click the start button while a round is not in progress
 
