@@ -7,21 +7,31 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
             [] placed on star adds 10pts every 5 turns
             [] placed on an asteroid belt heals 1 damage to 1 ship every 5 turns
             [] placed on a planet generates 1 scout ship every 5 turns
+        [] has missiles
+        [] has mass drivers
     [] dreadnaught - 100pts
         [] ion beam - every 3 turns allows player to hit the first enemy in a given column and stun the enemy ship for a random amount of time (1-3 turns)
-        [] has missles
+        [] has missiles
         [] has mass drivers
     [] battleship - 75pts
-        [] has both missles
-        [] mass drivers
+        [] has missiles
+        [] has mass drivers
     [] gun boat - 50pts
         [] has mass drivers
-    [] missle cruiser - 50pts
-        [] has missles
+    [] missile cruiser - 50pts
+        [] has missiles
     [] interceptor - 50pts
-        [] intercepts missles within a 3 unit radius of the ship
+        [] intercepts missiles within a 3 unit radius of the ship
     [] scout ship - 10pts
         [] scans a small area (2 unit square) of the enemy sector but cannot fight
+
+[X] list of names for ships
+    [x] dreadnaughts
+    [x] orbital stations
+    [X] battleships
+    [x] missile cruisers
+    [x] gunboats
+    [X] interceptors
 
 [] game boards are randomly generated
     [] always has at least 1 star
@@ -47,7 +57,7 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
 
 [] opponent statistics
     [] number of enemy ships spotted and destroyed
-    [] number of enemy missles/mass drivers shot
+    [] number of enemy missiles/mass drivers shot
     [] enemy hit/miss ratio
 
 [] fog of war
@@ -58,7 +68,7 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
     [] dreadnaught - can move 3 units
     [] battleship - can move 7 units
     [] gun boat - can move 5 units
-    [] missle cruiser - can move 5 units
+    [] missile cruiser - can move 5 units
     [] interceptor - can move 5 units
     [] scout ship - can move 2 units
 
@@ -67,3 +77,51 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
     [] random movement for scout ships
 
 */
+
+orbitalStationNames = [
+    'BEIJING', 'NEW DELHI', 'WASHINGTON', 'JAKARTA', 'ISLAMABAD'
+    ,'BRASILIA', 'ABUJA', 'DHAKA', 'MOSCOW', 'MEXICO CITY'
+    ,'TOKYO', 'ADDIS ABABA', 'MANILA', 'CAIRO', 'HANOI'
+    ,'KINSHASA', 'ANKARA', 'TEHRAN', 'BERLIN', 'BANGKOK'
+    ,'LONDON', 'PARIS', 'ROME', 'DODOMA', 'PRETORIA'
+]
+
+dreadnaughtNames = [
+    'ARIZONA', 'AJAX', 'BISMARK', 'DIXMUDE', 'DREADNOUGHT'
+    ,'ENTERPRISE', 'FURIOUS', 'BABYLON', 'HOOD', 'KAGA'
+    ,'KAWACHI', 'MARAT', 'MISSOURI', 'ODIN', 'STEAMBOAT WILLY'
+    ,'TEXAS', 'VIKRANT', 'VULCAN', 'WARSPITE', 'YAMATO'
+    ,'YORKTOWN', 'AGAMEMNON', 'VALIANT', 'REVOLUTSIYA', 'SAO PAULO'
+]
+
+battleshipNames = [
+    'KARL GALSTER', 'AKIZUKI', 'JOHNSTON', 'ALVISE DA MOSTO', 'ALPINO'
+    ,'AVIERE', 'CARRISTA', 'KIDD', 'SOUTHERLAND', 'STORD'
+    ,'GABBARD', 'LAGOS', 'TRAGALGAR', 'BORDELON', 'CHEVALIER'
+    ,'AULT', 'LENINGRAD', 'BLACK', 'CALLAGHAN', 'GROM'
+    ,'MINEGUMO', 'NOOTKA', 'REGINA MARIA', 'NESTOR', 'SHARK'
+]
+
+missileCruiserNames = [
+    'BRAND', 'DRAZKI', 'FRESIA', 'GUACOLDA', 'GUALE'
+    ,'HAVKATTEN', 'HAVORNEN', 'HOGEN', 'HU NGO', 'HU YING'
+    ,'HVALEN', 'IKU-TURSO', 'KALEV', 'KJELL', 'MAKRELEN'
+    ,'MARSUINUI', 'NAJADEN', 'NYMPHEN', 'QUIDORA', 'RECHINUL'
+    ,'RUCAMILLA', 'RYS', 'SALTA', 'SAUKKO', 'WILK'
+]
+
+gunboatNames = [
+    'AHTI', 'BAIRE', 'BOGOTA', 'CARTAGENA', 'CHEN SHEN'
+    ,'CHIEN CHUNG', 'CORDOBA', 'DRAGEN', 'GENERAL HALLER', 'HAFIR'
+    ,'HEJMDAL', 'HSIEN NING', 'ILMATAR', 'JUNIN', 'KARJALA'
+    ,'KING', 'KOMENDANT PILSUDSKI', 'LAINE', 'MAAGEN', 'MARDUS'
+    ,'PANAY', 'SANTA MARTA', 'TAARA', 'TIRANE', 'TURUNMAA'
+]
+
+interceptorNames = [
+    'AJONPAA', 'AURA', 'BATHURST', 'BOUCHARD', 'CZAJKA'
+    ,'DRSKI', 'DURRES', 'FREJA', 'HAI YEN', 'IGUAPE'
+    ,'ITAJAHY', 'JASKOLKA', 'KHRABRY', 'MAAGEN', 'MEWA'
+    ,'NORDKAPP', 'PICHINCHA', 'PORKALA', 'RYBITWA', 'SMELY'
+    ,'TERNEN', 'TURSAS', 'VILPPULA', 'WAKAKURA', 'ZURAW'
+]
