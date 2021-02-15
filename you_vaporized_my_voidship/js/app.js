@@ -25,13 +25,13 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
     [] scout ship - 10pts
         [] scans a small area (2 unit square) of the enemy sector but cannot fight
 
-[X] list of names for ships
-    [x] dreadnaughts
-    [x] orbital stations
-    [X] battleships
-    [x] missile cruisers
-    [x] gunboats
-    [X] interceptors
+[] list of names for ships
+    [] dreadnaughts
+    [] orbital stations
+    [] battleships
+    [] missile cruisers
+    [] gunboats
+    [] interceptors
 
 [] game boards are randomly generated
     [] always has at least 1 star
@@ -79,49 +79,46 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
 */
 
 orbitalStationNames = [
-    'BEIJING', 'NEW DELHI', 'WASHINGTON', 'JAKARTA', 'ISLAMABAD'
-    ,'BRASILIA', 'ABUJA', 'DHAKA', 'MOSCOW', 'MEXICO CITY'
-    ,'TOKYO', 'ADDIS ABABA', 'MANILA', 'CAIRO', 'HANOI'
-    ,'KINSHASA', 'ANKARA', 'TEHRAN', 'BERLIN', 'BANGKOK'
-    ,'LONDON', 'PARIS', 'ROME', 'DODOMA', 'PRETORIA'
+    'BASTION', 'BABYLON', 'ORBITAL 3', 'ORBITAL 4', 'ORBITAL 5'
+    ,'ORBITAL 6', 'ORBITAL 7', 'ORBITAL 8', 'ORBITAL 9', 'ORBITAL 10'
 ]
 
 dreadnaughtNames = [
-    'ARIZONA', 'AJAX', 'BISMARK', 'DIXMUDE', 'DREADNOUGHT'
-    ,'ENTERPRISE', 'FURIOUS', 'BABYLON', 'HOOD', 'KAGA'
-    ,'KAWACHI', 'MARAT', 'MISSOURI', 'ODIN', 'STEAMBOAT WILLY'
-    ,'TEXAS', 'VIKRANT', 'VULCAN', 'WARSPITE', 'YAMATO'
-    ,'YORKTOWN', 'AGAMEMNON', 'VALIANT', 'REVOLUTSIYA', 'SAO PAULO'
+    'DREADNAUGHT 1', 'DREADNAUGHT 2', 'DREADNAUGHT 3', 'DREADNAUGHT 4', 'DREADNAUGHT 5'
+    ,'DREADNAUGHT 6', 'DREADNAUGHT 7', 'DREADNAUGHT 8', 'DREADNAUGHT 9', 'DREADNAUGHT 10'
 ]
 
 battleshipNames = [
-    'KARL GALSTER', 'AKIZUKI', 'JOHNSTON', 'ALVISE DA MOSTO', 'ALPINO'
-    ,'AVIERE', 'CARRISTA', 'KIDD', 'SOUTHERLAND', 'STORD'
-    ,'GABBARD', 'LAGOS', 'TRAGALGAR', 'BORDELON', 'CHEVALIER'
-    ,'AULT', 'LENINGRAD', 'BLACK', 'CALLAGHAN', 'GROM'
-    ,'MINEGUMO', 'NOOTKA', 'REGINA MARIA', 'NESTOR', 'SHARK'
+    'BATTLESHIP 1', 'BATTLESHIP 2', 'BATTLESHIP 3', 'BATTLESHIP 4', 'BATTLESHIP 5'
+    ,'BATTLESHIP 6', 'BATTLESHIP 7', 'BATTLESHIP 8', 'BATTLESHIP 9', 'BATTLESHIP 10'
 ]
 
 missileCruiserNames = [
-    'BRAND', 'DRAZKI', 'FRESIA', 'GUACOLDA', 'GUALE'
-    ,'HAVKATTEN', 'HAVORNEN', 'HOGEN', 'HU NGO', 'HU YING'
-    ,'HVALEN', 'IKU-TURSO', 'KALEV', 'KJELL', 'MAKRELEN'
-    ,'MARSUINUI', 'NAJADEN', 'NYMPHEN', 'QUIDORA', 'RECHINUL'
-    ,'RUCAMILLA', 'RYS', 'SALTA', 'SAUKKO', 'WILK'
+    'CRUISER 1', 'CRUISER 2', 'CRUISER 3', 'CRUISER 4', 'CRUISER 5'
+    ,'CRUISER 6', 'CRUISER 7', 'CRUISER 8', 'CRUISER 9', 'CRUISER 10'
 ]
 
 gunboatNames = [
-    'AHTI', 'BAIRE', 'BOGOTA', 'CARTAGENA', 'CHEN SHEN'
-    ,'CHIEN CHUNG', 'CORDOBA', 'DRAGEN', 'GENERAL HALLER', 'HAFIR'
-    ,'HEJMDAL', 'HSIEN NING', 'ILMATAR', 'JUNIN', 'KARJALA'
-    ,'KING', 'KOMENDANT PILSUDSKI', 'LAINE', 'MAAGEN', 'MARDUS'
-    ,'PANAY', 'SANTA MARTA', 'TAARA', 'TIRANE', 'TURUNMAA'
+    'GUNBOAT 1', 'GUNBOAT 2', 'GUNBOAT 3', 'GUNBOAT 4', 'GUNBOAT 5'
+    ,'GUNBOAT 6', 'GUNBOAT 7', 'GUNBOAT 8', 'GUNBOAT 9', 'GUNBOAT 10'
 ]
 
 interceptorNames = [
-    'AJONPAA', 'AURA', 'BATHURST', 'BOUCHARD', 'CZAJKA'
-    ,'DRSKI', 'DURRES', 'FREJA', 'HAI YEN', 'IGUAPE'
-    ,'ITAJAHY', 'JASKOLKA', 'KHRABRY', 'MAAGEN', 'MEWA'
-    ,'NORDKAPP', 'PICHINCHA', 'PORKALA', 'RYBITWA', 'SMELY'
-    ,'TERNEN', 'TURSAS', 'VILPPULA', 'WAKAKURA', 'ZURAW'
+    'INTERCEPTOR 1', 'INTERCEPTOR 2', 'INTERCEPTOR 3', 'INTERCEPTOR 4', 'INTERCEPTOR 5'
+    ,'INTERCEPTOR 6', 'INTERCEPTOR 7', 'INTERCEPTOR 8', 'INTERCEPTOR 9', 'INTERCEPTOR 10'
 ]
+
+class Ship {
+    constructor(shipLength, shipWidth, hullPoints, movement) {
+        this.shipLength = shipLength
+        ;this.shipWidth = shipWidth
+        ;this.hullPoints = hullPoints
+        ;this.movement = movement
+    }
+
+    takeDamage(damage) {
+        this.hullPoints -= damage
+    }
+
+}
+
