@@ -4,9 +4,10 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
 [] Players start off by "buying" ships with a certain number of points (300pts)
     [] orbital station - 100pts
         [] allows player to collect resources on the map
-            [] placed on star adds 10pts every 5 turns
-            [] placed on an asteroid belt heals 1 damage to 1 ship every 5 turns
-            [] placed on a planet generates 1 scout ship every 5 turns
+            [] placed on star - adds 10pts every 5 turns
+            [] placed on an asteroid belt - heals 1 damage to 1 ship every 5 turns
+            [] placed on a planet generates - 1 scout ship every 5 turns
+            [] placed on a gas giant - generates 5 missles and 10 shells every 5 turns
         [] has missiles
         [] has mass drivers
     [] dreadnaught - 100pts
@@ -76,6 +77,13 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
     [] patrol routes for large ships
     [] random movement for scout ships
 
+[] things a ship should be able to do
+    [] move
+    [] attack
+    [] miss
+    [] take damage
+    [] lose accuracy when damaged
+
 */
 
 orbitalStationNames = [
@@ -109,16 +117,63 @@ interceptorNames = [
 ]
 
 class Ship {
-    constructor(shipLength, shipWidth, hullPoints, movement) {
-        this.shipLength = shipLength
-        ;this.shipWidth = shipWidth
-        ;this.hullPoints = hullPoints
-        ;this.movement = movement
+    constructor(
+        shipLength // size of ship in y direction
+        ,shipWidth // size of ship in x direction
+        ,hullPoints // health of ship, determines when ship is destroyed and can affect targeting accuracy
+        ,movement // how far the ship can move in both x and y directions in 1 turn
+        ,targetingSensors // how accurate a ship is when firing at an enemy
+        ,currentX  // current x position of the lower left most unit of the ship's profile
+        ,currentY  // current y position of the lower left most unit of the ship's profile
+        ,missileStorage // starting and maximum amount of missiles the ship can carry
+        ,shellStorage // starting and maximum amount of shells the ship can carry
+        ){
+            this.shipLength = shipLength
+            this.shipWidth = shipWidth
+            this.hullPoints = hullPoints
+            this.movement = movement
+            this.targetingSensors = targetingSensors
+            this.currentX = currentX
+            this.currentY = currentY
+            this.missileStorage = missileStorage
+            this.shellStorage = shellStorage
+
+            this.attacks = {
+                missile: 1
+                ,shell: 2
+            }
+    }
+
+    attack(target, weapon) {
+        if (this.checkHit()) {
+            target.takeDamage(this.attacks(weapon))
+        }
+    }
+
+    fireMissile(target) {
+        this.missileStorage --
+        this.attack(target, 'missile')
+    }
+
+    fireShell(target) {
+        this.shellStorage--
+        this.attack(target, 'shell')
     }
 
     takeDamage(damage) {
         this.hullPoints -= damage
     }
 
-}
+    checkHit() {
+        // the level of a ship's targeting sensors determine outcome of attack
+        // sensors of level 10 always result in a hit
+        if (Math.random() < this.targetingSensors * .1) {
+            return true
+        } else {
+            return false
+        }
+    }
 
+
+
+}
