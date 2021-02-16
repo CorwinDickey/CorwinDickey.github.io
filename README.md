@@ -8,7 +8,7 @@ Here you can find a little about me and all of the projects that I have worked o
 [Repository](https://github.com/CorwinDickey/CorwinDickey.github.io/tree/main/you_vaporized_my_voidship)  
 Published: In Development  
 Created: Feb 14, 2021  
-Last Edited: Feb 14, 2021  
+Last Edited: Feb 15, 2021  
 
 This is a game of my own design inspired by my love of space fiction and the classic game of Battleship.  
 
