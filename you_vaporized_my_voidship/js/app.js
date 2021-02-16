@@ -2,7 +2,7 @@
 A game inspired by the classic "Battleship" game. Two players, first player to 300pts wins.
 
 [] Players start off by "buying" ships with a certain number of points (300pts)
-    [] orbital station - 100pts
+    [] orbital station - 150pts
         [] allows player to collect resources on the map
             [] placed on star - adds 10pts every 5 turns
             [] placed on an asteroid belt - heals 1 damage to 1 ship every 5 turns
@@ -10,7 +10,7 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
             [] placed on a gas giant - generates 5 missles and 10 shells every 5 turns
         [] has missiles
         [] has mass drivers
-    [] dreadnaught - 100pts
+    [] dreadnaught - 150pts
         [] ion beam - every 3 turns allows player to hit the first enemy in a given column and stun the enemy ship for a random amount of time (1-3 turns)
         [] has missiles
         [] has mass drivers
@@ -65,24 +65,26 @@ A game inspired by the classic "Battleship" game. Two players, first player to 3
     [] can be scanned by a scout ship
     [] scanning lasts for 1 turn, then fog of war is back but stationary objects remain revealed (planets, stars, stations, asteroid belts)
 
-[] ships can move or attack/special each turn
-    [] dreadnaught - can move 3 units
-    [] battleship - can move 7 units
-    [] gun boat - can move 5 units
-    [] missile cruiser - can move 5 units
-    [] interceptor - can move 5 units
-    [] scout ship - can move 2 units
+
 
 [] auto move for ships
     [] patrol routes for large ships
     [] random movement for scout ships
 
 [] things a ship should be able to do
-    [] move
+    [] ships can move or attack/special each turn
+        [] dreadnaught - can move 3 units
+        [] battleship - can move 7 units
+        [] gun boat - can move 5 units
+        [] missile cruiser - can move 5 units
+        [] interceptor - can move 5 units
+        [] scout ship - can move 2 units
     [] attack
+        [] missiles - 1 dmg in a 3 unit radius
+        [] shell - 2 dmg single point
     [] miss
     [] take damage
-    [] lose accuracy when damaged
+        [x] lose accuracy when damaged
 
 */
 
@@ -116,6 +118,12 @@ interceptorNames = [
     ,'INTERCEPTOR 6', 'INTERCEPTOR 7', 'INTERCEPTOR 8', 'INTERCEPTOR 9', 'INTERCEPTOR 10'
 ]
 
+app = {
+    checkIntercept: function() {
+        // checks if one area intercepts another area
+    }
+}
+
 class Ship {
     constructor(
         shipLength // size of ship in y direction
@@ -130,13 +138,16 @@ class Ship {
         ){
             this.shipLength = shipLength
             this.shipWidth = shipWidth
-            this.hullPoints = hullPoints
+            this.maxHullPoints = hullPoints
+            this.currentHullPoints = hullPoints
             this.movement = movement
             this.targetingSensors = targetingSensors
             this.currentX = currentX
             this.currentY = currentY
-            this.missileStorage = missileStorage
-            this.shellStorage = shellStorage
+            this.ammunitionStores = {
+                missile: missileStorage
+                ,shell: shellStorage
+            }
 
             this.attacks = {
                 missile: 1
@@ -161,19 +172,47 @@ class Ship {
     }
 
     takeDamage(damage) {
-        this.hullPoints -= damage
+        this.currentHullPoints -= damage
     }
 
     checkHit() {
         // the level of a ship's targeting sensors determine outcome of attack
         // sensors of level 10 always result in a hit
-        if (Math.random() < this.targetingSensors * .1) {
+
+        let currentTargeting = this.targetingSensors
+        let hullIntegrity = Math.ceil((this.currentHullPoints / this.maxHullPoints) * 10) / 10
+
+        switch(hullIntegrity) {
+            case .8:
+            case .7:
+                currentTargeting -= 1
+                // console.log(currentTargeting, 'checkHit: 1')
+                break
+            case .6:
+            case .5:
+                currentTargeting -= 2
+                // console.log(currentTargeting, 'checkHit: 2')
+                break
+            case .4:
+            case .3:
+                currentTargeting -= 3
+                // console.log(currentTargeting, 'checkHit: 3')
+                break
+            case .2:
+                currentTargeting -= 4
+                // console.log(currentTargeting, 'checkHit: 4')
+                break
+            case .1:
+                currentTargeting -= 5
+                // console.log(currentTargeting, 'checkHit: 5')
+                break
+        }
+
+        if (Math.random() < currentTargeting * .1) {
             return true
         } else {
             return false
         }
     }
-
-
 
 }
