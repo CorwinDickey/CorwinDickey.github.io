@@ -119,8 +119,18 @@ interceptorNames = [
 ]
 
 app = {
-    checkIntercept: function() {
+    checkIntercept: function(area1, area2) {
         // checks if one area intercepts another area
+    }
+
+    ,getArea: function(target) {
+        let area = {
+            x1: target.currentX
+            ,x2: target.currentX + target.objectWidth
+            ,y1: target.currentY
+            ,y2: target.currentY + target.objectLength
+        }
+        return area
     }
 }
 
@@ -133,26 +143,27 @@ class Ship {
         ,targetingSensors // how accurate a ship is when firing at an enemy
         ,currentX  // current x position of the lower left most unit of the ship's profile
         ,currentY  // current y position of the lower left most unit of the ship's profile
-        ,missileStorage // starting and maximum amount of missiles the ship can carry
-        ,shellStorage // starting and maximum amount of shells the ship can carry
+        ,missileStores // starting and maximum amount of missiles the ship can carry
+        ,shellStores // starting and maximum amount of shells the ship can carry
         ){
-            this.shipLength = shipLength
-            this.shipWidth = shipWidth
-            this.maxHullPoints = hullPoints
-            this.currentHullPoints = hullPoints
-            this.movement = movement
-            this.targetingSensors = targetingSensors
-            this.currentX = currentX
-            this.currentY = currentY
-            this.ammunitionStores = {
-                missile: missileStorage
-                ,shell: shellStorage
-            }
 
-            this.attacks = {
-                missile: 1
-                ,shell: 2
-            }
+        this.objectLength = shipLength
+        this.objectWidth = shipWidth
+        this.maxHullPoints = hullPoints
+        this.currentHullPoints = hullPoints
+        this.movement = movement
+        this.targetingSensors = targetingSensors
+        this.currentX = currentX
+        this.currentY = currentY
+        this.ammunitionStores = {
+            missile: missileStores
+            ,shell: shellStores
+        }
+
+        this.attacks = {
+            missile: 1
+            ,shell: 2
+        }
     }
 
     attack(target, weapon) {
@@ -178,6 +189,7 @@ class Ship {
     checkHit() {
         // the level of a ship's targeting sensors determine outcome of attack
         // sensors of level 10 always result in a hit
+        // ship damage reduces accuracy
 
         let currentTargeting = this.targetingSensors
         let hullIntegrity = Math.ceil((this.currentHullPoints / this.maxHullPoints) * 10) / 10
@@ -213,6 +225,16 @@ class Ship {
         } else {
             return false
         }
+    }
+
+    getArea() {
+        let area = {
+            x1: this.currentX
+            ,x2: this.currentX + this.shipWidth
+            ,y1: this.currentY
+            ,y2: this.currentY + this.shipLength
+        }
+        return area
     }
 
 }
