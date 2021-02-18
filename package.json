@@ -1,0 +1,22 @@
+{
+  "name": "corwindickey.com",
+  "version": "1.0.0",
+  "description": "Personal website to showcase my web-development skills.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CorwinDickey/CorwinDickey.github.io.git"
+  },
+  "author": "Corwin Dickey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CorwinDickey/CorwinDickey.github.io/issues"
+  },
+  "homepage": "https://github.com/CorwinDickey/CorwinDickey.github.io#readme",
+  "dependencies": {
+    "ejs": "^3.1.6"
+  }
+}

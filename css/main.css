@@ -1,0 +1,21 @@
+body {
+    display: flex
+    ;flex-direction: column
+}
+
+/* #projects-container {
+    border: 1px solid grey
+} */
+
+.project-card {
+    display: flex
+    ;flex-direction: column
+    ;align-items: center
+    ;border: 1px solid lightgray
+    ;border-radius: 3vw
+    ;width: 20vw
+}
+
+.project-card img {
+    width: 15vw
+}
